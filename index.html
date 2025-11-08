@@ -1,29 +1,40 @@
 <html>
 <head>
-    <title>Telegram Mini-App</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://telegram.org/js/telegram-web-app.js?59"></script>
+  <title>Telegram Mini App Dark Mode Fix</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-    <p>Hello world!</p>
+  <h1>Hello, Telegram!</h1>
+  <button>Click Me</button>
 
-    <script>
-        const tg = window.Telegram.WebApp;
-        tg.ready();
-        const user = tg.initDataUnsafe?.user;
-        console.log('User info:', user);
-        if (user) {
-            document.body.insertAdjacentHTML(
-                'beforeend',
-                `<p>Welcome, ${user.first_name}! (id: ${user.id})</p>`
-            );
-        } else {
-            document.body.insertAdjacentHTML(
-                'beforeend',
-                `<p>No Telegram user data found.</p>`
-            );
-        }
-    </script>
-    <script src="main.js" defer></script>
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.ready();
+
+    function applyTheme() {
+      const theme = tg.colorScheme; // "light" or "dark"
+      if (theme === "dark") {
+        document.body.style.backgroundColor = "#1a1a1a";
+        document.body.style.color = "#ffffff";
+        document.querySelectorAll('button').forEach(btn => {
+          btn.style.backgroundColor = "#333333";
+          btn.style.color = "#ffffff";
+        });
+      } else {
+        document.body.style.backgroundColor = "#ffffff";
+        document.body.style.color = "#000000";
+        document.querySelectorAll('button').forEach(btn => {
+          btn.style.backgroundColor = "#3390ec";
+          btn.style.color = "#ffffff";
+        });
+      }
+    }
+
+    // Apply theme immediately
+    applyTheme();
+
+    // Update theme when user switches in Telegram
+    tg.onEvent('themeChanged', applyTheme);
+  </script>
 </body>
 </html>
