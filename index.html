@@ -1,10 +1,29 @@
 <html>
-    <head>
-        <title>Telegram Mini-App</title>
-        <link rel = "stylesheet" href="styles.css">
-    </head>
-    <body>
-        <p>Hello world!</p>
-        <script src="main.js" defer></script>
-    </body>
+<head>
+    <title>Telegram Mini-App</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://telegram.org/js/telegram-web-app.js?59"></script>
+</head>
+<body>
+    <p>Hello world!</p>
+
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+        const user = tg.initDataUnsafe?.user;
+        console.log('User info:', user);
+        if (user) {
+            document.body.insertAdjacentHTML(
+                'beforeend',
+                `<p>Welcome, ${user.first_name}! (id: ${user.id})</p>`
+            );
+        } else {
+            document.body.insertAdjacentHTML(
+                'beforeend',
+                `<p>No Telegram user data found.</p>`
+            );
+        }
+    </script>
+    <script src="main.js" defer></script>
+</body>
 </html>
