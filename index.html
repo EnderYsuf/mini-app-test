@@ -8,24 +8,31 @@
     const tg = window.Telegram.WebApp;
     tg.ready();
 
-    const user = tg.initDataUnsafe?.user;
-        console.log('User info:', user);
-        if (user) {
-            document.body.insertAdjacentHTML(
-              'beforeend',
-              `<img src="${user.photo_url}" width=150px height = auto>`
-            )
-            document.body.insertAdjacentHTML(
-                'beforeend',
-                `<p>Welcome, ${user.first_name}! (id: ${user.id})</p>`
-            );
-        } else {
-            document.body.insertAdjacentHTML(
-                'beforeend',
-                `<p>No Telegram user data found.</p>`
-            );
-        }
+    // center body and add font/padding
+    document.body.style.textAlign = "center";
+    document.body.style.fontFamily = "sans-serif";
+    document.body.style.padding = "20px";
 
+    // Display user info
+    const user = tg.initDataUnsafe?.user;
+    console.log('User info:', user);
+    if (user) {
+      document.body.insertAdjacentHTML(
+        'beforeend',
+        `<img src="${user.photo_url}" width="150" style="height:auto; border-radius:50%; margin-bottom:15px;">`
+      );
+      document.body.insertAdjacentHTML(
+        'beforeend',
+        `<p>Welcome, ${user.first_name}! (id: ${user.id})</p>`
+      );
+    } else {
+      document.body.insertAdjacentHTML(
+        'beforeend',
+        `<p>No Telegram user data found.</p>`
+      );
+    }
+
+    // Dark / Light theme
     function applyTheme() {
       const theme = tg.colorScheme;
       if (theme === "dark") {
@@ -36,7 +43,8 @@
         document.body.style.color = "#000000";
       }
     }
-    document.body.style.text_align = "center";  
+
+    // Apply immediately and on theme change
     applyTheme();
     tg.onEvent('themeChanged', applyTheme);
   </script>
