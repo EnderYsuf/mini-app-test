@@ -11,6 +11,20 @@
     const tg = window.Telegram.WebApp;
     tg.ready();
 
+    const user = tg.initDataUnsafe?.user;
+        console.log('User info:', user);
+        if (user) {
+            document.body.insertAdjacentHTML(
+                'beforeend',
+                `<p>Welcome, ${user.first_name}! (id: ${user.id})</p>`
+            );
+        } else {
+            document.body.insertAdjacentHTML(
+                'beforeend',
+                `<p>No Telegram user data found.</p>`
+            );
+        }
+
     function applyTheme() {
       const theme = tg.colorScheme; // "light" or "dark"
       if (theme === "dark") {
@@ -29,11 +43,7 @@
         });
       }
     }
-
-    // Apply theme immediately
     applyTheme();
-
-    // Update theme when user switches in Telegram
     tg.onEvent('themeChanged', applyTheme);
   </script>
 </body>
