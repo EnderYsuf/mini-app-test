@@ -8,13 +8,11 @@
     const tg = window.Telegram.WebApp;
     tg.ready();
 
-    // center body and add font/padding
     document.body.style.alignItems = "center";
     document.body.style.justifyItems = "center";
     document.body.style.fontFamily = "sans-serif";
     document.body.style.padding = "20px";
 
-    // Display user info
     const user = tg.initDataUnsafe?.user;
     console.log('User info:', user);
     if (user) {
@@ -24,7 +22,9 @@
       );
       document.body.insertAdjacentHTML(
         'beforeend',
-        `<p>Welcome, ${user.first_name}! (id: ${user.id})</p>`
+        `<p>Welcome, ${user.first_name}! (id: ${user.id})</p>
+        <input type="text" id="input" placeholder="Type whatever you want" name="nInput">
+        <button type="submit" id="btn" name="nInput">Submit</button>`
       );
     } else {
       document.body.insertAdjacentHTML(
@@ -33,7 +33,15 @@
       );
     }
 
-    // Dark / Light theme
+    document.getElementById("btn").addEventListener("click", () => {
+      let userInput = document.getElementById("input").value;
+
+      tg.sendData(JSON.stringify({
+        action:"input_save",
+        value:userInput
+      }));
+    })
+
     function applyTheme() {
       const theme = tg.colorScheme;
       if (theme === "dark") {
@@ -44,8 +52,7 @@
         document.body.style.color = "#000000";
       }
     }
-
-    // Apply immediately and on theme change
+    
     applyTheme();
     tg.onEvent('themeChanged', applyTheme);
   </script>
