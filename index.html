@@ -27,7 +27,8 @@
          <button id="btn">Submit</button>`
       );
     } else {
-      document.body.insertAdjacentHTML("beforeend", `<p>No Telegram user data found.</p>`);
+      document.body.insertAdjacentHTML("beforeend", `<input type="text" id="input" placeholder="Type whatever you want">
+         <button id="btn">Submit</button>`);
     }
 
       document.getElementById("btn").onclick = () => {
