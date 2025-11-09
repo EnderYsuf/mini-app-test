@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Telegram Mini App Dark Mode Fix</title>
+  <title>Telegram Mini App</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
@@ -8,39 +8,35 @@
     const tg = window.Telegram.WebApp;
     tg.ready();
 
+    document.body.style.display = "flex";
+    document.body.style.flexDirection = "column";
     document.body.style.alignItems = "center";
-    document.body.style.justifyItems = "center";
+    document.body.style.justifyContent = "center";
     document.body.style.fontFamily = "sans-serif";
     document.body.style.padding = "20px";
 
     const user = tg.initDataUnsafe?.user;
-    console.log('User info:', user);
+    console.log("User info:", user);
+
     if (user) {
       document.body.insertAdjacentHTML(
-        'beforeend',
-        `<img src="${user.photo_url}" width="150" style="height:auto; border-radius:50%; margin-bottom:15px;">`
-      );
-      document.body.insertAdjacentHTML(
-        'beforeend',
-        `<p>Welcome, ${user.first_name}! (id: ${user.id})</p>
-        <input type="text" id="input" placeholder="Type whatever you want" name="nInput">
-        <button type="submit" id="btn" name="nInput">Submit</button>`
+        "beforeend",
+        `<img src="${user.photo_url}" width="150" style="height:auto; border-radius:50%; margin-bottom:15px;">
+         <p>Welcome, ${user.first_name}! (id: ${user.id})</p>
+         <input type="text" id="input" placeholder="Type whatever you want">
+         <button id="btn">Submit</button>`
       );
     } else {
-      document.body.insertAdjacentHTML(
-        'beforeend',
-        `<p>No Telegram user data found.</p>`
-      );
+      document.body.insertAdjacentHTML("beforeend", `<p>No Telegram user data found.</p>`);
     }
 
     document.getElementById("btn").addEventListener("click", () => {
-      let userInput = document.getElementById("input").value;
-
+      const userInput = document.getElementById("input").value;
       tg.sendData(JSON.stringify({
-        action:"input_save",
-        value:userInput
+        action: "input_save",
+        value: userInput
       }));
-    })
+    });
 
     function applyTheme() {
       const theme = tg.colorScheme;
@@ -52,9 +48,9 @@
         document.body.style.color = "#000000";
       }
     }
-    
+
     applyTheme();
-    tg.onEvent('themeChanged', applyTheme);
+    tg.onEvent("themeChanged", applyTheme);
   </script>
 </body>
 </html>
