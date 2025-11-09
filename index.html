@@ -30,13 +30,15 @@
       document.body.insertAdjacentHTML("beforeend", `<p>No Telegram user data found.</p>`);
     }
 
-    document.getElementById("btn").addEventListener("click", () => {
-      const userInput = document.getElementById("input").value;
-      tg.sendData(JSON.stringify({
+      document.getElementById("btn").onclick = () => {
+        const userInput = document.getElementById("input").value;
+        tg.sendData(JSON.stringify({
         action: "input_save",
         value: userInput
       }));
-    });
+      tg.close();
+    };
+
 
     function applyTheme() {
       const theme = tg.colorScheme;
@@ -52,5 +54,6 @@
     applyTheme();
     tg.onEvent("themeChanged", applyTheme);
   </script>
+  <p style="color:gray; position:absolute; bottom:0">0.4</p>
 </body>
 </html>
