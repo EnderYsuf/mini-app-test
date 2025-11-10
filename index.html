@@ -15,7 +15,12 @@
       document.body.style.fontFamily = "sans-serif";
       document.body.style.padding = "20px";
 
-      const user = tg.initDataUnsafe?.user;
+      const user = tg.initDataUnsafe?.user || { 
+        first_name: "Guest", 
+        id: "N/A", 
+        photo_url: "https://via.placeholder.com/150"
+      };
+
       console.log("User info:", user);
 
       document.body.insertAdjacentHTML(
@@ -44,8 +49,11 @@
         if (btn) {
           btn.style.padding = "5px";
           btn.style.borderRadius = "5px";
+          btn.style.color = "#fff";
+          btn.style.border = "none";
+          btn.style.cursor = "pointer";
         }
-        
+
         if (theme === "dark") {
           document.body.style.backgroundColor = "#1a1a1a";
           document.body.style.color = "#ffffff";
