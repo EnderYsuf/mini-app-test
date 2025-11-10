@@ -1,56 +1,66 @@
 <html>
-<head>
-  <title>Telegram Mini App</title>
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-</head>
-<body>
-  <script>
-    const tg = window.Telegram.WebApp;
-    tg.ready();
+  <head>
+    <title>Telegram Mini App</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  </head>
+  <body>
+    <script>
+      const tg = window.Telegram.WebApp;
+      tg.ready();
 
-    document.body.style.display = "flex";
-    document.body.style.flexDirection = "column";
-    document.body.style.alignItems = "center";
-    document.body.style.justifyContent = "center";
-    document.body.style.fontFamily = "sans-serif";
-    document.body.style.padding = "20px";
-    document.button.style.padding = "5px";
-    document.button.style.borderRadius = "5px";
+      document.body.style.display = "flex";
+      document.body.style.flexDirection = "column";
+      document.body.style.alignItems = "center";
+      document.body.style.justifyContent = "center";
+      document.body.style.fontFamily = "sans-serif";
+      document.body.style.padding = "20px";
 
-    const user = tg.initDataUnsafe?.user;
-    console.log("User info:", user);
+      const user = tg.initDataUnsafe?.user;
+      console.log("User info:", user);
 
-      document.body.insertAdjacentHTML("beforeend", `<img src="${user.photo_url}" width="150" style="height:auto; border-radius:50%; margin-bottom:15px;">
+      document.body.insertAdjacentHTML(
+        "beforeend",
+        `<img src="${user.photo_url}" width="150" style="height:auto; border-radius:50%; margin-bottom:15px;">
          <p>Welcome, ${user.first_name}! (id: ${user.id})</p>
          <input type="text" id="input" placeholder="Type whatever you want">
-         <button id="btn">Submit</button>`);
+         <button id="btn">Submit</button>`
+      );
 
       document.getElementById("btn").onclick = () => {
         const userInput = document.getElementById("input").value;
-        tg.sendData(JSON.stringify({
-        action: "input_save",
-        value: userInput
-      }));
-      tg.close();
-    };
+        tg.sendData(
+          JSON.stringify({
+            action: "input_save",
+            value: userInput,
+          })
+        );
+        tg.close();
+      };
 
+      function applyTheme() {
+        const theme = tg.colorScheme;
+        const btn = document.getElementById("btn");
 
-    function applyTheme() {
-      const theme = tg.colorScheme;
-      if (theme === "dark") {
-        document.body.style.backgroundColor = "#1a1a1a";
-        document.body.style.color = "#ffffff";
-        document.getElementById("btn").style.backgroundColor = "#1E90FF"; 
-      } else {
-        document.body.style.backgroundColor = "#ffffff";
-        document.body.style.color = "#000000";
-        document.getElementById("btn").style.backgroundColor = "#007BFF";
+        if (btn) {
+          btn.style.padding = "5px";
+          btn.style.borderRadius = "5px";
+        }
+        
+        if (theme === "dark") {
+          document.body.style.backgroundColor = "#1a1a1a";
+          document.body.style.color = "#ffffff";
+          if (btn) btn.style.backgroundColor = "#1E90FF";
+        } else {
+          document.body.style.backgroundColor = "#ffffff";
+          document.body.style.color = "#000000";
+          if (btn) btn.style.backgroundColor = "#007BFF";
+        }
       }
-    }
 
-    applyTheme();
-    tg.onEvent("themeChanged", applyTheme);
-  </script>
-  <p style="color:gray; position:absolute; bottom:0">0.4</p>
-</body>
+      applyTheme();
+      tg.onEvent("themeChanged", applyTheme);
+    </script>
+
+    <p style="color:gray; position:absolute; bottom:0">0.4</p>
+  </body>
 </html>
