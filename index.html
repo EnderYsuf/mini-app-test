@@ -14,22 +14,16 @@
     document.body.style.justifyContent = "center";
     document.body.style.fontFamily = "sans-serif";
     document.body.style.padding = "20px";
+    document.button.style.padding = "5px";
+    document.button.style.borderRadius = "5px";
 
     const user = tg.initDataUnsafe?.user;
     console.log("User info:", user);
 
-    if (user) {
-      document.body.insertAdjacentHTML(
-        "beforeend",
-        `<img src="${user.photo_url}" width="150" style="height:auto; border-radius:50%; margin-bottom:15px;">
+      document.body.insertAdjacentHTML("beforeend", `<img src="${user.photo_url}" width="150" style="height:auto; border-radius:50%; margin-bottom:15px;">
          <p>Welcome, ${user.first_name}! (id: ${user.id})</p>
          <input type="text" id="input" placeholder="Type whatever you want">
-         <button id="btn">Submit</button>`
-      );
-    } else {
-      document.body.insertAdjacentHTML("beforeend", `<input type="text" id="input" placeholder="Type whatever you want">
          <button id="btn">Submit</button>`);
-    }
 
       document.getElementById("btn").onclick = () => {
         const userInput = document.getElementById("input").value;
@@ -46,9 +40,11 @@
       if (theme === "dark") {
         document.body.style.backgroundColor = "#1a1a1a";
         document.body.style.color = "#ffffff";
+        document.getElementById("btn").style.backgroundColor = "#1E90FF"; 
       } else {
         document.body.style.backgroundColor = "#ffffff";
         document.body.style.color = "#000000";
+        document.getElementById("btn").style.backgroundColor = "#007BFF";
       }
     }
 
