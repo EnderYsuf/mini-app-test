@@ -84,11 +84,14 @@ const mcDisplay = document.getElementById("count");
 const unDisplay = document.getElementById("name");
 
 if (userName && userName !== "") {
-  randomGreeting = greetings[Math.floor(Math.random() * greetings.length)].replace("{name}", userName);
+  const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)].replace("{name}", userName);
+  nameDisplay.textContent = randomGreeting;
 }
 
-if (msgCount !=="0" && msgCount) {
-  mcDisplay.textContent = `You've send ${msgCount} messages so far!`;
+if (msgCount && msgCount !== "0") {
+  countDisplay.textContent = `You've sent ${msgCount} messages so far!`;
+} else {
+  countDisplay.textContent = "You haven't sent any messages yet :(";
 }
 
 btn.onclick = () => {
@@ -122,6 +125,7 @@ function applyTheme() {
 
 applyTheme();
 tg.onEvent("themeChanged", applyTheme);
+
 
 
 
