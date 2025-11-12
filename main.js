@@ -89,9 +89,9 @@ if (userName && userName !== "") {
 }
 
 if (msgCount && msgCount !== "0") {
-  countDisplay.textContent = `You've sent ${msgCount} messages so far!`;
+  mcDisplay.textContent = `You've sent ${msgCount} messages so far!`;
 } else {
-  countDisplay.textContent = "You haven't sent any messages yet :(";
+  mcDisplay.textContent = "You haven't sent any messages yet :(";
 }
 
 btn.onclick = () => {
@@ -125,6 +125,7 @@ function applyTheme() {
 
 applyTheme();
 tg.onEvent("themeChanged", applyTheme);
+
 
 
 
