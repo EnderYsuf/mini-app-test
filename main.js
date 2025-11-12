@@ -85,7 +85,7 @@ const unDisplay = document.getElementById("name");
 
 if (userName && userName !== "") {
   const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)].replace("{name}", userName);
-  nameDisplay.textContent = randomGreeting;
+  unDisplay.textContent = randomGreeting;
 }
 
 if (msgCount && msgCount !== "0") {
@@ -125,6 +125,7 @@ function applyTheme() {
 
 applyTheme();
 tg.onEvent("themeChanged", applyTheme);
+
 
 
 
