@@ -87,7 +87,7 @@ if (userName && userName !== "") {
   randomGreeting = greetings[Math.floor(Math.random() * greetings.length)].replace("{name}", userName);
 }
 
-if (msgCount !="0") {
+if (msgCount !=="0" && msgCount) {
   mcDisplay.textContent = `You've send ${msgCount} messages so far!`;
 }
 
@@ -122,5 +122,6 @@ function applyTheme() {
 
 applyTheme();
 tg.onEvent("themeChanged", applyTheme);
+
 
 
