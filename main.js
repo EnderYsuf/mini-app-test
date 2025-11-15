@@ -105,7 +105,7 @@ btn.onclick = () => {
   tg.close();
 };
 
-function applyTheme() {
+/*function applyTheme() {
   const theme = tg.colorScheme;
 
   if (theme === "dark") {
@@ -124,7 +124,8 @@ function applyTheme() {
 }
 
 applyTheme();
-tg.onEvent("themeChanged", applyTheme);
+tg.onEvent("themeChanged", applyTheme);*/
+
 
 
 
