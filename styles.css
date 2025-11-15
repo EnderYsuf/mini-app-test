@@ -6,6 +6,8 @@ body {
   font-family: system-ui, sans-serif;
   padding: 20px;
   transition: background-color 0.3s, color 0.3s;
+  background-color: var(--tg-theme-bg-color);
+  color: var(--tg-theme-text-color);
 }
 
 input {
@@ -33,7 +35,7 @@ button {
   font-weight: 600;
   cursor: pointer;
   color: white;
-  background-color: #2AABEE;
+  background-color: var(--tg-theme-button-color);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
   transition: background-color 0.3s, transform 0.1s;
 }
